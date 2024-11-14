@@ -1,0 +1,30 @@
+<h1>Ajouter un signet à la liste : <%= @list.name %></h1>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <% if @bookmark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bookmark.errors.count, "erreur") %> interdit l’ajout du signet :</h2>
+      <ul>
+        <% @bookmark.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :movie %>
+    <%= f.association :movie, collection: Movie.all, prompt: "Choisissez un film" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comment %>
+    <%= f.text_field :comment %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Ajouter le signet" %>
+  </div>
+<% end %>
+
+<%= link_to 'Retour à la liste', list_path(@list) %>
