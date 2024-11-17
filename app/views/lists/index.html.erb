@@ -1,11 +1,23 @@
-<h1>Toutes les listes</h1>
+<div class="container">
+  <h1 class="text-center my-4">Toutes les listes</h1>
 
-<ul>
-  <% @lists.each do |list| %>
-    <li>
-      <%= link_to list.name, list_path(list) %>
-    </li>
-  <% end %>
-</ul>
+  <div class="row">
+    <% @lists.each do |list| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <% if list.image_url.present? %>
+            <img src="<%= list.image_url %>" class="card-img-top" alt="<%= list.name %>">
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= list.name %></h5>
+            <%= link_to 'Voir la liste', list_path(list), class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<%= link_to 'Créer une nouvelle liste', new_list_path %>
+  <div class="text-center">
+    <%= link_to 'Créer une nouvelle liste', new_list_path, class: "btn btn-success mt-4" %>
+  </div>
+</div>
